@@ -1,0 +1,15 @@
+digraph builder {
+  rankdir=LR; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "Order" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- id: int<BR/>- customerName: String<BR/>- type: Type<BR/>- tableNumber: int<BR/>- address: String<BR/>- comment: String<BR/>- items: List&lt;Meal&gt;</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- Order(b: Builder)<BR/>+ getSubtotal(): double<BR/>+ getDestination(): String<BR/>+ ...getters</TD></TR></TABLE>>];
+"Order.Builder" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;static nested&raquo;</FONT><BR/><B>Order.Builder</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- customerName: String<BR/>- type: Type<BR/>- tableNumber: int<BR/>- address: String<BR/>- comment: String<BR/>- items: List&lt;Meal&gt;</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ customer(name): Builder<BR/>+ dineIn(table): Builder<BR/>+ delivery(address): Builder<BR/>+ addItem(meal: Meal): Builder<BR/>+ comment(text): Builder<BR/>+ build(): Order</TD></TR></TABLE>>];
+"RestaurantFacade" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>RestaurantFacade / Main (director)</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ placeOrder(b: Order.Builder): Order</TD></TR></TABLE>>];
+"Meal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>Meal</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Order.Builder" -> "Order" [arrowhead=vee, style=dashed, label="build() creates"];
+"RestaurantFacade" -> "Order.Builder" [arrowhead=vee, style=dashed, label="uses"];
+"Order.Builder" -> "Meal" [arrowtail=odiamond, dir=back, arrowhead=vee, label="0..*", constraint="false"];
+"n1" [shape=note, style=filled, fillcolor="#fffbd6", fontsize=10, label="build() validates: name required,\nat least one meal, table for dine-in,\naddress for delivery"];
+"n1" -> "Order.Builder" [style=dotted, arrowhead=none, constraint="false"];
+}
