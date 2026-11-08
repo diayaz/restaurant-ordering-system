@@ -1,0 +1,25 @@
+digraph facade {
+  rankdir=TB; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "Main" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#f2f2f2" ALIGN="CENTER"><B>Main (console client)</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ main(args)<BR/>- createOrder()<BR/>- checkout()<BR/>- runDemo()</TD></TR></TABLE>>];
+"RestaurantFacade" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>RestaurantFacade</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- kitchen: KitchenDisplay<BR/>- customerNotifier: CustomerNotifier<BR/>- cashier: CashierDashboard<BR/>- orders: List&lt;Order&gt;</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ orderMeal(c, toppings...): Meal<BR/>+ placeOrder(b: Order.Builder): Order<BR/>+ nextStatus(o: Order)<BR/>+ cookAndServe(o: Order)<BR/>+ cancel(o: Order)<BR/>+ checkout(o, discount, payment): boolean<BR/>+ printReceipt(o, r: Receipt): String</TD></TR></TABLE>>];
+subgraph cluster_s { label="Subsystem"; style=dashed; color="#999999"; fontsize=10;
+"MealFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>MealFactory</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Topping" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;enum&raquo;</FONT><BR/><B>Topping</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Order.Builder" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order.Builder</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Order" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"OrderObserver" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>KitchenDisplay / CustomerNotifier / CashierDashboard</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"DiscountStrategy" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>DiscountStrategy / PaymentStrategy</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Receipt" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><I>Receipt + ReceiptRenderer</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+}
+"Main" -> "RestaurantFacade" [arrowhead=vee, label="uses only"];
+"RestaurantFacade" -> "MealFactory" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Topping" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Order.Builder" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Order" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "OrderObserver" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "DiscountStrategy" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Receipt" [arrowhead=vee, style=dashed];
+}
