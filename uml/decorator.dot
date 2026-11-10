@@ -1,0 +1,24 @@
+digraph decorator {
+  rankdir=BT; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "Meal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>Meal</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getName(): String<BR/>+ getDescription(): String<BR/>+ getPrice(): double<BR/>+ getCategory(): MealCategory</TD></TR></TABLE>>];
+"BaseMeal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>BaseMeal (Burger, Pizza, ...)</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"ToppingDecorator" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>ToppingDecorator</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># wrapped: Meal</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription(): String<BR/>+ getPrice(): double</TD></TR></TABLE>>];
+"ExtraCheese" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>ExtraCheese</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription()<BR/>+ getPrice()  // +400</TD></TR></TABLE>>];
+"Bacon" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Bacon</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription()<BR/>+ getPrice()  // +600</TD></TR></TABLE>>];
+"SpicySauce" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>SpicySauce</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription()<BR/>+ getPrice()  // +250</TD></TR></TABLE>>];
+"ExtraIce" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>ExtraIce</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription()<BR/>+ getPrice()  // +100</TD></TR></TABLE>>];
+"Topping" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;enumeration&raquo;</FONT><BR/><B>Topping</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">EXTRA_CHEESE, BACON,<BR/>SPICY_SAUCE, EXTRA_ICE</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ applyTo(meal: Meal): Meal</TD></TR></TABLE>>];
+"BaseMeal" -> "Meal" [arrowhead=onormal, style=dashed];
+"ToppingDecorator" -> "Meal" [arrowhead=onormal, style=dashed];
+"ToppingDecorator" -> "Meal" [arrowtail=odiamond, dir=back, arrowhead=vee, label="wraps 1", constraint="false"];
+"ExtraCheese" -> "ToppingDecorator" [arrowhead=onormal];
+"Bacon" -> "ToppingDecorator" [arrowhead=onormal];
+"SpicySauce" -> "ToppingDecorator" [arrowhead=onormal];
+"ExtraIce" -> "ToppingDecorator" [arrowhead=onormal];
+"Topping" -> "ToppingDecorator" [arrowhead=vee, style=dashed, label="creates", constraint="false"];
+"n1" [shape=note, style=filled, fillcolor="#fffbd6", fontsize=10, label="new Bacon(new ExtraCheese(burger))\n-> 'Beef Burger + Extra Cheese + Bacon'\n-> 2500 + 400 + 600 = 3500 KZT"];
+"n1" -> "Bacon" [style=dotted, arrowhead=none, constraint="false"];
+}
