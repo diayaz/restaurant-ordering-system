@@ -1,0 +1,31 @@
+digraph factory {
+  rankdir=BT; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "MealFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>MealFactory</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal  {abstract}<BR/>+ prepareMeal(): Meal<BR/>+ forCategory(c): MealFactory  {static}</TD></TR></TABLE>>];
+"BurgerFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>BurgerFactory</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal</TD></TR></TABLE>>];
+"PizzaFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>PizzaFactory</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal</TD></TR></TABLE>>];
+"SaladFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>SaladFactory</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal</TD></TR></TABLE>>];
+"DrinkFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>DrinkFactory</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal</TD></TR></TABLE>>];
+"Meal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>Meal</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getName(): String<BR/>+ getDescription(): String<BR/>+ getPrice(): double<BR/>+ getCategory(): MealCategory</TD></TR></TABLE>>];
+"BaseMeal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>BaseMeal</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- name: String<BR/>- description: String<BR/>- price: double<BR/>- category: MealCategory</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Burger" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Burger</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Pizza" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Pizza</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Salad" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Salad</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Drink" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Drink</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"BurgerFactory" -> "MealFactory" [arrowhead=onormal];
+"PizzaFactory" -> "MealFactory" [arrowhead=onormal];
+"SaladFactory" -> "MealFactory" [arrowhead=onormal];
+"DrinkFactory" -> "MealFactory" [arrowhead=onormal];
+"BaseMeal" -> "Meal" [arrowhead=onormal, style=dashed];
+"Burger" -> "BaseMeal" [arrowhead=onormal];
+"Pizza" -> "BaseMeal" [arrowhead=onormal];
+"Salad" -> "BaseMeal" [arrowhead=onormal];
+"Drink" -> "BaseMeal" [arrowhead=onormal];
+"MealFactory" -> "Meal" [arrowhead=vee, style=dashed, label="creates", constraint="false"];
+"BurgerFactory" -> "Burger" [arrowhead=vee, style=dashed, label="«create»"];
+"PizzaFactory" -> "Pizza" [arrowhead=vee, style=dashed, label="«create»"];
+"SaladFactory" -> "Salad" [arrowhead=vee, style=dashed, label="«create»"];
+"DrinkFactory" -> "Drink" [arrowhead=vee, style=dashed, label="«create»"];
+}
