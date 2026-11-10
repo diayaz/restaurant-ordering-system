@@ -1,0 +1,25 @@
+digraph strategy {
+  rankdir=BT; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "Order" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order (context)</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- discountStrategy: DiscountStrategy</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ setDiscountStrategy(d)<BR/>+ getSubtotal(): double<BR/>+ getDiscount(): double<BR/>+ getFinalTotal(): double</TD></TR></TABLE>>];
+"DiscountStrategy" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>DiscountStrategy</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ calculateDiscount(o: Order): double<BR/>+ getName(): String</TD></TR></TABLE>>];
+"NoDiscount" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>NoDiscount</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ calculateDiscount(o)  // 0</TD></TR></TABLE>>];
+"StudentDiscount" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>StudentDiscount</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ calculateDiscount(o)  // 10%</TD></TR></TABLE>>];
+"HappyHourDiscount" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>HappyHourDiscount</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ calculateDiscount(o)  // drinks -50%</TD></TR></TABLE>>];
+"RestaurantFacade" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>RestaurantFacade (client)</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ checkout(o, d: DiscountStrategy,<BR/>      p: PaymentStrategy): boolean</TD></TR></TABLE>>];
+"PaymentStrategy" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>PaymentStrategy</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pay(amount: double): boolean<BR/>+ getName(): String</TD></TR></TABLE>>];
+"CashPayment" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>CashPayment</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- cashGiven: double</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pay(amount)</TD></TR></TABLE>>];
+"CardPayment" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>CardPayment</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- cardNumber: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pay(amount)</TD></TR></TABLE>>];
+"KaspiQrPayment" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>KaspiQrPayment</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- phone: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pay(amount)</TD></TR></TABLE>>];
+"Order" -> "DiscountStrategy" [arrowtail=odiamond, dir=back, arrowhead=vee, label="uses 1", constraint="false"];
+"NoDiscount" -> "DiscountStrategy" [arrowhead=onormal, style=dashed];
+"StudentDiscount" -> "DiscountStrategy" [arrowhead=onormal, style=dashed];
+"HappyHourDiscount" -> "DiscountStrategy" [arrowhead=onormal, style=dashed];
+"CashPayment" -> "PaymentStrategy" [arrowhead=onormal, style=dashed];
+"CardPayment" -> "PaymentStrategy" [arrowhead=onormal, style=dashed];
+"KaspiQrPayment" -> "PaymentStrategy" [arrowhead=onormal, style=dashed];
+"RestaurantFacade" -> "PaymentStrategy" [arrowhead=vee, style=dashed, label="uses", constraint="false"];
+"RestaurantFacade" -> "Order" [arrowhead=vee, style=dashed, label="sets strategy", constraint="false"];
+}
