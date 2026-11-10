@@ -1,0 +1,19 @@
+digraph observer {
+  rankdir=BT; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  "OrderSubject" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>OrderSubject</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ attach(o: OrderObserver)<BR/>+ detach(o: OrderObserver)<BR/>+ notifyObservers(old, new)</TD></TR></TABLE>>];
+"Order" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- status: OrderStatus<BR/>- observers: List&lt;OrderObserver&gt;</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ attach(o)<BR/>+ detach(o)<BR/>+ notifyObservers(old, new)<BR/>+ setStatus(s: OrderStatus)</TD></TR></TABLE>>];
+"OrderObserver" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>OrderObserver</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ update(order, old, new)</TD></TR></TABLE>>];
+"KitchenDisplay" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>KitchenDisplay</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ update(order, old, new)</TD></TR></TABLE>>];
+"CustomerNotifier" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>CustomerNotifier</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ update(order, old, new)</TD></TR></TABLE>>];
+"CashierDashboard" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>CashierDashboard</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- paidOrders: int<BR/>- revenue: double</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ update(order, old, new)<BR/>+ getRevenue(): double</TD></TR></TABLE>>];
+"OrderStatus" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;enumeration&raquo;</FONT><BR/><B>OrderStatus</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">PLACED, COOKING, READY,<BR/>SERVED, PAID, CANCELLED</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ next(): OrderStatus</TD></TR></TABLE>>];
+"Order" -> "OrderSubject" [arrowhead=onormal, style=dashed];
+"Order" -> "OrderObserver" [arrowtail=odiamond, dir=back, arrowhead=vee, label="notifies  0..*", constraint="false"];
+"KitchenDisplay" -> "OrderObserver" [arrowhead=onormal, style=dashed];
+"CustomerNotifier" -> "OrderObserver" [arrowhead=onormal, style=dashed];
+"CashierDashboard" -> "OrderObserver" [arrowhead=onormal, style=dashed];
+"Order" -> "OrderStatus" [arrowhead=vee, label="status"];
+}
