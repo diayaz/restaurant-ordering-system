@@ -1,0 +1,55 @@
+digraph overall {
+  rankdir=TB; nodesep=0.5; ranksep=0.65; 
+  graph [fontname="DejaVu Sans", fontsize=11, bgcolor="white", dpi=150];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=10];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#444444"];
+  subgraph cluster_y { label="Yeskendyr - Factory Method + Decorator"; style=filled; fillcolor="#f6faff"; color="#9bbbe0"; fontsize=11;
+"Meal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>Meal</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ getDescription()<BR/>+ getPrice()</TD></TR></TABLE>>];
+"MealFactory" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>MealFactory</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># createMeal(): Meal<BR/>+ prepareMeal(): Meal</TD></TR></TABLE>>];
+"ConcreteFactories" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Burger/Pizza/Salad/DrinkFactory</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Products" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>Burger / Pizza / Salad / Drink</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"ToppingDecorator" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><I>ToppingDecorator</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># wrapped: Meal</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Toppings" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e8f1fb" ALIGN="CENTER"><B>ExtraCheese / Bacon / SpicySauce / ExtraIce</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+}
+subgraph cluster_d { label="Dias - Observer + Strategy"; style=filled; fillcolor="#f7fcf6"; color="#a5cfa0"; fontsize=11;
+"OrderObserver" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>OrderObserver</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ update(order, old, new)</TD></TR></TABLE>>];
+"Observers" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>KitchenDisplay / CustomerNotifier / CashierDashboard</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"OrderSubject" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>OrderSubject</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ attach / detach / notify</TD></TR></TABLE>>];
+"DiscountStrategy" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>DiscountStrategy</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ calculateDiscount(o)</TD></TR></TABLE>>];
+"PaymentStrategy" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>PaymentStrategy</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pay(amount)</TD></TR></TABLE>>];
+"Discounts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>No / Student / HappyHour</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Payments" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#eaf6e9" ALIGN="CENTER"><B>Cash / Card / KaspiQr</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+}
+subgraph cluster_k { label="Kuandyk - Builder + Bridge + Facade"; style=filled; fillcolor="#fffaf4"; color="#e6b98a"; fontsize=11;
+"RestaurantFacade" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>RestaurantFacade</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ orderMeal()<BR/>+ placeOrder()<BR/>+ nextStatus()<BR/>+ checkout()<BR/>+ printReceipt()</TD></TR></TABLE>>];
+"Order" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">- items: List&lt;Meal&gt;<BR/>- status<BR/>- discountStrategy</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ setStatus()<BR/>+ getFinalTotal()</TD></TR></TABLE>>];
+"Order.Builder" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>Order.Builder</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ customer().dineIn()<BR/>  .addItem().build()</TD></TR></TABLE>>];
+"Receipt" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><I>Receipt</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"># renderer</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ print(order)</TD></TR></TABLE>>];
+"ReceiptRenderer" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><FONT POINT-SIZE="10">&laquo;interface&raquo;</FONT><BR/><I>ReceiptRenderer</I></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Receipts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>ShortReceipt / DetailedReceipt</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Renderers" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fdf0e3" ALIGN="CENTER"><B>ConsoleRenderer / HtmlRenderer</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+}
+"Main" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#f2f2f2" ALIGN="CENTER"><B>Main (console UI)</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Main" -> "RestaurantFacade" [arrowhead=vee];
+"ConcreteFactories" -> "MealFactory" [arrowhead=onormal];
+"Products" -> "Meal" [arrowhead=onormal, style=dashed];
+"ToppingDecorator" -> "Meal" [arrowhead=onormal, style=dashed];
+"Toppings" -> "ToppingDecorator" [arrowhead=onormal];
+"MealFactory" -> "Meal" [arrowhead=vee, style=dashed, label="creates"];
+"Observers" -> "OrderObserver" [arrowhead=onormal, style=dashed];
+"Discounts" -> "DiscountStrategy" [arrowhead=onormal, style=dashed];
+"Payments" -> "PaymentStrategy" [arrowhead=onormal, style=dashed];
+"Receipts" -> "Receipt" [arrowhead=onormal];
+"Renderers" -> "ReceiptRenderer" [arrowhead=onormal, style=dashed];
+"Receipt" -> "ReceiptRenderer" [arrowtail=odiamond, dir=back, arrowhead=vee, label="bridge"];
+"Order.Builder" -> "Order" [arrowhead=vee, style=dashed, label="builds"];
+"Order" -> "OrderSubject" [arrowhead=onormal, style=dashed];
+"Order" -> "OrderObserver" [arrowtail=odiamond, dir=back, arrowhead=vee, label="notifies"];
+"Order" -> "DiscountStrategy" [arrowtail=odiamond, dir=back, arrowhead=vee, label="uses"];
+"Order" -> "Meal" [arrowtail=odiamond, dir=back, arrowhead=vee, label="items"];
+"RestaurantFacade" -> "MealFactory" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Order.Builder" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "PaymentStrategy" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Receipt" [arrowhead=vee, style=dashed];
+"RestaurantFacade" -> "Observers" [arrowhead=vee, style=dashed, label="subscribes"];
+}
